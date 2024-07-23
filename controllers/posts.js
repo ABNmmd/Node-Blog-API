@@ -39,7 +39,6 @@ const getPostById = async (req, res) => {
 };
 
 
-// get posts by title by autor apis
 
 //appdate api
 const updatePost = async (req, res) => {
