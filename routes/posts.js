@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {creatPost, getPosts, getPostById, updatePost, deletePost} = require('../controllers/posts.js');
+const {creatPost, getPosts, getPostById, updatePost, deletePost} = require('../controllers/postController.js');
 
 
 
