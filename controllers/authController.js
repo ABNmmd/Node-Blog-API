@@ -16,7 +16,7 @@ const register = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};
+}
 
 //Login
 const login = async (req, res) => {
@@ -38,5 +38,7 @@ const login = async (req, res) => {
         }
         req.session.userId = user._id;
         res.status(200).json({ message: 'Logged in successfully' });
+    } catch(error) {
+        res.status(500).json({ message: error.message })
     }
 }
