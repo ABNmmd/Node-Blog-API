@@ -14,7 +14,7 @@ const creatPost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};
+}
 
 
 const getPosts = async (req, res) => {
@@ -25,7 +25,7 @@ const getPosts = async (req, res) => {
         res.status(404).json({ message: "hello not working" });
         res.status(500).json({ message: error.message });
     }
-};
+}
 
 
 const getPostById = async (req, res) => {
@@ -36,7 +36,7 @@ const getPostById = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};
+}
 
 
 
@@ -52,7 +52,7 @@ const updatePost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};
+}
 
 
 //delete post api
@@ -67,7 +67,7 @@ const deletePost = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
-};
+}
 
 
 module.exports = {
@@ -76,4 +76,4 @@ module.exports = {
     getPostById,
     updatePost,
     deletePost,
-};
+}
