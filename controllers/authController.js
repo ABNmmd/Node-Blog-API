@@ -42,3 +42,8 @@ const login = async (req, res) => {
         res.status(500).json({ message: error.message })
     }
 }
+
+//Logout
+const logout = (req, res) => {
+    req.session.destroy();
+}
