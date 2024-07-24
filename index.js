@@ -11,15 +11,17 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+const store = new MongoDBStore({
+    mongoUrl: process.env.MONGODB_URI,
+    collection: "mySessions"
+});
+
 // Set up session middleware
 app.use(session({
     secret: process.env.SESSION_SECRET || 'my_secret_key',
     resave: false,
     saveUninitialized: false,
-    store: MongoDBStore.create({
-        mongoUrl: process.env.MONGODB_URI,
-        collection: "mySessions"
-    }),
+    store: store,
     cookie: { maxAge: 1000 * 60 * 60 * 24 } // 1 day
 }));
 
