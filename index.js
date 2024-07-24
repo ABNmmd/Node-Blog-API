@@ -28,7 +28,7 @@ app.use(express.json());
 
 
 //Import routes
-const postRoutes = require('./routes/posts.js');
+const postRoutes = require('./routes/postRouter.js');
 
 
 // Routes
