@@ -28,11 +28,14 @@ app.use(express.json());
 
 
 //Import routes
-const postRoutes = require('./routes/postRouter.js');
+const postRoutes = require('./routes/postRoutes.js');
+const authRoutes = require('./routes/authRoutes.js');
 
 
 // Routes
 app.use('/api/posts', postRoutes);
+app.use('/api/auth', authRoutes);
+
 
 
 // Connect to MongoDB
