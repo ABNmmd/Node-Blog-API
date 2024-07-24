@@ -14,7 +14,7 @@ const register = async (req, res) => {
         const user = await User.create({ username, email, password: hashedPassword });
         res.status(201).json({ message: 'User registered successfully' }, user);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ error: error.message });
     }
 }
 
@@ -39,11 +39,17 @@ const login = async (req, res) => {
         req.session.userId = user._id;
         res.status(200).json({ message: 'Logged in successfully' });
     } catch(error) {
-        res.status(500).json({ message: error.message })
+        res.status(500).json({ error: error.message })
     }
 }
 
 //Logout
 const logout = (req, res) => {
-    req.session.destroy();
+    req.session.destroy(err => {
+        if(err){
+            return res.status(500).json({ error: err.message })
+        }
+        res.clearCookie('connect.sid');
+        res.status(200).json({ message: 'Logged out successfully' });
+    });
 }
