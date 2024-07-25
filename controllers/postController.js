@@ -16,7 +16,7 @@ const creatPost = async (req, res) => {
     }
 }
 
-
+// get posts
 const getPosts = async (req, res) => {
     try {
         const posts = await Post.find({});
@@ -26,7 +26,7 @@ const getPosts = async (req, res) => {
     }
 }
 
-
+// get post by the id
 const getPostById = async (req, res) => {
     try {
         const { id } = req.params;
