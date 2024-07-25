@@ -2,7 +2,7 @@ require('dotenv').config();
 
 //Configure express-session and MongoDB store
 const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
+const MongoDBStore = require('connect-mongo');
 
 //Configure express and mongoose
 const express = require('express');
@@ -41,10 +41,7 @@ app.use('/api/auth', authRoutes);
 
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("conected to database.");
         // Start the server

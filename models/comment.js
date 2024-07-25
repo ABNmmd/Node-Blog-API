@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const CommentSchema = mongoose.Schema(
     {
-        _id: mongoose.Schema.Types.ObjectId,
         postId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
@@ -34,9 +33,6 @@ const CommentSchema = mongoose.Schema(
             default: Date.now,
         },
     },
-    {
-        timestamps: true,
-    }
 );
 
 const Comment = mongoose.model("comment", CommentSchema);

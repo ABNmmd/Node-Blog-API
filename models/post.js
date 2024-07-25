@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 const PostSchema = mongoose.Schema(
     {
-        _id: mongoose.Schema.Types.ObjectId,
         authorId: {
             type: mongoose.Schema.Types.ObjectId,
             required: true,
@@ -39,9 +38,6 @@ const PostSchema = mongoose.Schema(
             default: Date.now,
         },
     },
-    {
-        timestamps: true,
-    }
 );
 
 const Post = mongoose.model("post", PostSchema);
