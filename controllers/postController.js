@@ -22,7 +22,6 @@ const getPosts = async (req, res) => {
         const posts = await Post.find({});
         res.status(200).json(posts);
     } catch (error) {
-        res.status(404).json({ message: "hello not working" });
         res.status(500).json({ message: error.message });
     }
 }
@@ -40,7 +39,7 @@ const getPostById = async (req, res) => {
 
 
 
-//appdate api
+//uppdate api
 const updatePost = async (req, res) => {
     try {
         const { id } = req.params;
