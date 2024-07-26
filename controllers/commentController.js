@@ -30,7 +30,9 @@ const creatComment = async (req, res) => {
 // Get comments
 const getComments = async (req, res) => {
     try {
-        
+        const { postId } = req.params;
+        const comments = await Comment.find({ postId }).populate('authorId', 'username');
+        res.status(200).json(comments);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
