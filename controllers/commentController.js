@@ -37,3 +37,12 @@ const getComments = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+// Update a comment
+const updateComment = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
