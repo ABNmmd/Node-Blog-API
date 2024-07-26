@@ -88,3 +88,12 @@ const deleteComment = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
+
+//exporting
+module.exports = {
+    creatComment,
+    getComments,
+    updateComment,
+    deleteComment,
+}
