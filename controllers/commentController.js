@@ -63,3 +63,8 @@ const updateComment = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
+// delete a comment
+const deleteComment = async (req, res) => {
+    
+}
