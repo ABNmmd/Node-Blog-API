@@ -26,3 +26,12 @@ const creatComment = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+// Get comments
+const getComments = async (req, res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+}
