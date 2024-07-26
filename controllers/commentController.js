@@ -11,7 +11,17 @@ const creatComment = async (req, res) => {
         }
 
         const post = await Post.findById(postId);
-        if(!)
+        if(!post){
+            return res.status(400).json({ message: "Post not found" })
+        }
+
+        const comment = await Comment.create({
+            postId,
+            authorId: userId,
+            content,
+        });
+
+        res.status(201).json(comment);
     }catch(error) {
         res.status(500).json({ message: error.message });
     }
