@@ -22,6 +22,10 @@ const updateUserProfile = async (req, res) => {
         const { username, email, profilePicture, bio } = req.body;
         const userId = req.session.userId;
         const user = await User.findById(userId);
+
+        if(!user){
+            return res.status(404).json({ message: 'User not found' });
+        }
         
     } catch (error) {
         res.status(500).json({ error: error.message });
