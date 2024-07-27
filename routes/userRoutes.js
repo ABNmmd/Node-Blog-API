@@ -2,6 +2,7 @@ const express = require('express');
 const { getUser, updateUser } = require('../controllers/userController.js');
 
 const authMiddleware = require('../middleware/authMiddleware.js');
+const { validateUserProfileUpdate } = require('../utils/validators');
 
 const router = express.Router();
 
@@ -10,7 +11,7 @@ const router = express.Router();
 router.get('/', authMiddleware, getUser);
 
 // update user
-router.put('/', authMiddleware, updateUser);
+router.put('/', authMiddleware, validateUserProfileUpdate, updateUser);
 
 
 module.exports= router;
