@@ -15,3 +15,8 @@ const getUser = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 }
+
+// update user profile
+const updateUserProfile = async (req, res) => {
+    
+}
