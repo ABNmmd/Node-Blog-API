@@ -13,3 +13,4 @@ router.get('/', authMiddleware, getUser);
 router.put('/', authMiddleware, updateUser);
 
 
+module.exports= router;
