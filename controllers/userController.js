@@ -17,7 +17,7 @@ const getUser = async (req, res) => {
 }
 
 // update user profile
-const updateUserProfile = async (req, res) => {
+const updateUser = async (req, res) => {
     try {
         const { username, email, profilePicture, bio } = req.body;
         const userId = req.session.userId;
@@ -41,6 +41,6 @@ const updateUserProfile = async (req, res) => {
 }
 
 module.exports = {
-    getUserProfile,
-    updateUserProfile,
+    getUser,
+    updateUser,
 };
