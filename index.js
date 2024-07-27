@@ -32,13 +32,15 @@ app.use(express.json());
 //Import routes
 const authRoutes = require('./routes/authRoutes.js');
 const postRoutes = require('./routes/postRoutes.js');
-const commentRoutes = require("./routes/commentRoutes.js");
+const commentRoutes = require('./routes/commentRoutes.js');
+const userRoutes = require('./routes/userRoutes.js')
 
 
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
+app.use('/api/user', userRoutes);
 
 
 
