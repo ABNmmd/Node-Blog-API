@@ -4,7 +4,7 @@ const User = require("../models/user");
 const getUser = async (req, res) => {
     try {
         const userId = req.session.userId;
-        const user = await User.findById({ userId }).select("-password");
+        const user = await User.findById(userId).select("-password");
 
         if(!user){
             return res.status(404).json({ message: 'User not found' });
@@ -19,6 +19,9 @@ const getUser = async (req, res) => {
 // update user profile
 const updateUserProfile = async (req, res) => {
     try {
+        const { username, email, profilePicture, bio } = req.body;
+        const userId = req.session.userId;
+        const user = await User.findById(userId);
         
     } catch (error) {
         res.status(500).json({ error: error.message });
