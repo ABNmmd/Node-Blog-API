@@ -3,13 +3,14 @@ const Post = require("../models/post");
 //Creat post
 const creatPost = async (req, res) => {
     try {
-        const { title, content, author } = req.body;
+        const { title, content, tags } = req.body;
+        const authorId = req.session.userId;
 
-        if (!title || !content || !author) {
-            return res.status(400).json({ message: "Title, content, and author are required." });
+        if (!title || !content || authorId) {
+            return res.status(400).json({ message: "Title, content, tags and authorId are required." });
         }
 
-        const post = await Post.create({ title, content, author });
+        const post = await Post.create({ authorId, title, content, tags });
         res.status(201).json(post);
     } catch (error) {
         res.status(500).json({ message: error.message });

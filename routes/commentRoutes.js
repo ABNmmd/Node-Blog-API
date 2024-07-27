@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/', authMiddleware, createComment);
 
 // get comment
-router.get('/', getComments);
+router.get('/:postId', getComments);
 
 // update comment
 router.put('/:id', authMiddleware, updateComment);
