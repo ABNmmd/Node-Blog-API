@@ -27,6 +27,14 @@ const updateUserProfile = async (req, res) => {
             return res.status(404).json({ message: 'User not found' });
         }
         
+        if (username) user.username = username;
+        if (email) user.email = email;
+        if (profilePicture) user.profilePicture = profilePicture;
+        if (bio) user.bio = bio;
+        user.updatedAt = Date.now();
+
+        await user.save();
+        res.status(200).json({ message: 'Profile updated successfully', user });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
