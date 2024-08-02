@@ -6,8 +6,10 @@ const MongoDBStore = require('connect-mongo');
 
 //Configure express and mongoose
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 
+app.use(cors());
 
 const app = express();
 
