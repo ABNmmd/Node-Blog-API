@@ -55,9 +55,19 @@ const logout = (req, res) => {
     });
 }
 
+// auth status
+const checkAuthStatus = (req, res) => {
+    if (req.session.userId) {
+        res.status(200).json({ authenticated: true });
+    } else {
+        res.status(200).json({ authenticated: false });
+    }
+};
+
 
 module.exports = {
     register,
     login,
     logout,
+    checkAuthStatus,
 }

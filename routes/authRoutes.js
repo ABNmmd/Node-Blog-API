@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { register, login, logout } = require('../controllers/authController');
+const { register, login, logout, checkAuthStatus } = require('../controllers/authController');
 
 const router = express.Router();
 
@@ -12,5 +12,8 @@ router.post('/login', login);
 
 // Logout route
 router.post('/logout', logout);
+
+// auth status check route
+router.get('/status', checkAuthStatus);
 
 module.exports = router;
