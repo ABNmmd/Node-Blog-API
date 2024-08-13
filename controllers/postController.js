@@ -5,8 +5,8 @@ const creatPost = async (req, res) => {
     try {
         const { title, content, tags } = req.body;
         const authorId = req.session.userId;
-
-        if (!title || !content || authorId) {
+        // console.log({ title, content, tags, authorId });
+        if (!title || !content || !authorId) {
             return res.status(400).json({ message: "Title, content, tags and authorId are required." });
         }
 
