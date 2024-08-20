@@ -1,5 +1,6 @@
 const Comment = require("../models/comment");
 const Post = require("../models/post");
+const User = require("../models/user");
 
 //creat comment
 const createComment = async (req, res) => {
@@ -32,8 +33,15 @@ const getComments = async (req, res) => {
     try {
         const { postId } = req.params;
         const comments = await Comment.find({ postId }).populate('authorId', 'username');
+
+        if (!comments) {
+            return res.status(404).json({ message: 'No comments found for this post' });
+        }
+
+        console.log('comments: ', comments);
         res.status(200).json(comments);
     } catch (error) {
+        console.error('Error fetching comments:', error);
         res.status(500).json({ error: error.message });
     }
 }

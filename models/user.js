@@ -16,10 +16,12 @@ const UserSchema = mongoose.Schema(
         },
         profilePicture: {
             type: String,
+            default: '',
             required: false,
         },
         bio: {
             type: String,
+            default: '',
             required: false,
         },
         createdAt: {

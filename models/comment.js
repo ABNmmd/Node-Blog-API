@@ -4,12 +4,12 @@ const CommentSchema = mongoose.Schema(
     {
         postId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Post',
+            ref: 'post',
             required: true,
         },
         authorId: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
+            ref: 'user',
             required: true,
         },
         content: {
@@ -19,13 +19,13 @@ const CommentSchema = mongoose.Schema(
         likes: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
+                ref: 'user',
             }
         ],
         dislikes: [
             {
                 type: mongoose.Schema.Types.ObjectId,
-                ref: 'User',
+                ref: 'user',
             }
         ],
         createdAt: {

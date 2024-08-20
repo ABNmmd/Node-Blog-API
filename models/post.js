@@ -4,6 +4,7 @@ const PostSchema = mongoose.Schema(
     {
         authorId: {
             type: mongoose.Schema.Types.ObjectId,
+            ref: 'user',
             required: true,
         },
         title: {
@@ -22,11 +23,13 @@ const PostSchema = mongoose.Schema(
         likes: [
             {
                 type: mongoose.Schema.Types.ObjectId,
+                ref: 'user',
             }
         ],
         dislikes: [
             {
                 type: mongoose.Schema.Types.ObjectId,
+                ref: 'user',
             }
         ],
         createdAt: {
