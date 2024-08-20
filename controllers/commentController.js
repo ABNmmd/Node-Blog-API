@@ -38,7 +38,7 @@ const getComments = async (req, res) => {
             return res.status(404).json({ message: 'No comments found for this post' });
         }
 
-        console.log('comments: ', comments);
+        // console.log('comments: ', comments);
         res.status(200).json(comments);
     } catch (error) {
         console.error('Error fetching comments:', error);
