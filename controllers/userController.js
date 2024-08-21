@@ -16,6 +16,22 @@ const getUser = async (req, res) => {
     }
 }
 
+// get profile
+const getProfile = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const user = await User.findById(userId).select("-password");
+
+        if(!user){
+            return res.status(404).json({ message: 'User not found' });
+        }
+        // console.log(user);
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
 // update user profile
 const updateUser = async (req, res) => {
     try {
@@ -43,4 +59,5 @@ const updateUser = async (req, res) => {
 module.exports = {
     getUser,
     updateUser,
+    getProfile,
 };
