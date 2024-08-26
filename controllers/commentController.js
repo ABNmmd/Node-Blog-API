@@ -7,12 +7,12 @@ const createComment = async (req, res) => {
     try {
         const { content, postId } = req.body;
         const userId = req.session.userId;
-        if(!content || !postId) {
+        if (!content || !postId) {
             return res.status(400).json({ message: "Content and Post ID are required." });
         }
 
         const post = await Post.findById(postId);
-        if(!post){
+        if (!post) {
             return res.status(400).json({ message: "Post not found" })
         }
 
@@ -23,7 +23,7 @@ const createComment = async (req, res) => {
         });
 
         res.status(201).json(comment);
-    }catch(error) {
+    } catch (error) {
         res.status(500).json({ error: error.message });
     }
 }
@@ -50,22 +50,14 @@ const getComments = async (req, res) => {
 const updateComment = async (req, res) => {
     try {
         const { id } = req.params;
-        const { newContent } = req.body;
-        const userId = req.session.userId;
 
-        const comment = await Comment.findById(id);
-        if(!comment){
-            return res.status(404).json({ message: "comment not fond." })
+        const updatedComment = await Comment.findByIdAndUpdate(id, req.body, { new: true });
+        // console.log(updatedComment);
+        if (!updatedComment) {
+            return res.status(404).json({ message: "Comment not found or not authorized" });
         }
 
-        if(comment.authorId.toString() !== userId){
-            return res.status(403).json({ message: "You are not authorized to update this comment." });
-        }
-
-        comment.content = newContent;
-        await comment.save();
-
-        res.status(200).json(comment);
+        res.status(200).json(updatedComment);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -78,11 +70,11 @@ const deleteComment = async (req, res) => {
         const userId = req.session.userId;
 
         const comment = await Comment.findById(id);
-        if(!comment){
+        if (!comment) {
             return res.status(404).json({ message: "comment not fond." })
         }
 
-        if(comment.authorId.toString() !== userId){
+        if (comment.authorId.toString() !== userId) {
             return res.status(403).json({ message: "You are not authorized to delete this comment." });
         }
 
