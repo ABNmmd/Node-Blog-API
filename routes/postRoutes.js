@@ -21,10 +21,10 @@ router.put('/:id', authMiddleware, updatePost);
 router.delete('/:id', authMiddleware, deletePost);
 
 // like a post
-router.put('/:id/like', likePost);
+router.put('/:id/like', authMiddleware, likePost);
 
 // dislike a post
-router.put('/:id/dislike', dislikePost);
+router.put('/:id/dislike', authMiddleware, dislikePost);
 
 
 module.exports = router;
