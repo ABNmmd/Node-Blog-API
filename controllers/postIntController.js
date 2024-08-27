@@ -17,7 +17,7 @@ const likePost = async (req, res) => {
             post.likes.push(userId);
             post.dislikes = post.dislikes.filter(dislike => dislike.toString() !== userId);
         }
-        
+
         await post.save();
         res.status(200).json(post);
     } catch (error) {
@@ -52,5 +52,5 @@ const dislikePost = async (req, res) => {
 
 module.exports = {
     likePost,
-
+    dislikePost,
 }
