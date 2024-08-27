@@ -1,5 +1,5 @@
 const express = require('express');
-const {creatPost, getPosts, getPostById, updatePost, deletePost} = require('../controllers/postController.js');
+const {creatPost, getPosts, getPostById, updatePost, deletePost, likePost, dislikePost} = require('../controllers/postController.js');
 
 const authMiddleware = require('../middleware/authMiddleware.js');
 
@@ -19,6 +19,12 @@ router.put('/:id', authMiddleware, updatePost);
 
 //delete post
 router.delete('/:id', authMiddleware, deletePost);
+
+// like a post
+router.put('/:id/like', likePost);
+
+// dislike a post
+router.put('/:id/dislike', dislikePost);
 
 
 module.exports = router;
