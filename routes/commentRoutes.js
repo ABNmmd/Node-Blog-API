@@ -10,7 +10,7 @@ const router = express.Router();
 // create comment
 router.post('/', authMiddleware, createComment);
 
-// get comment
+// get comments
 router.get('/:postId', getComments);
 
 // update comment
@@ -19,10 +19,10 @@ router.put('/:id', authMiddleware, updateComment);
 // delete comment
 router.delete('/:id', authMiddleware, deleteComment);
 
-// like a post
+// like a comment
 router.put('/:id/like', authMiddleware, likeComment);
 
-// dislike a post
+// dislike a comment
 router.put('/:id/dislike', authMiddleware, dislikeComment);
 
 module.exports = router;
