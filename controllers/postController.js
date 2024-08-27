@@ -20,7 +20,7 @@ const creatPost = async (req, res) => {
 // get posts
 const getPosts = async (req, res) => {
     try {
-        const posts = await Post.find({}).populate('authorId', 'username');
+        const posts = await Post.find({}).populate('authorId', 'username').select("-content -likes -dislikes");
         res.status(200).json(posts);
     } catch (error) {
         res.status(500).json({ message: error.message });
