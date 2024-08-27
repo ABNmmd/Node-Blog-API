@@ -6,7 +6,7 @@ const likePost = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const post = Post.findById(id);
+        const post = await Post.findById(id);
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
@@ -17,6 +17,8 @@ const likePost = async (req, res) => {
             post.likes.push(userId);
             post.dislikes = post.dislikes.filter(dislike => dislike.toString() !== userId);
         }
+        await post.save();
+        res.status(200).json(post);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
