@@ -85,6 +85,56 @@ const deleteComment = async (req, res) => {
     }
 }
 
+// Like a comment
+const likeComment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.session.userId;
+
+        const comment = await Comment.findById(id);
+        if (!comment) {
+            return res.status(404).json({ message: "comment not fond." })
+        }
+
+        if (comment.likes.includes(userId)) {
+            comment.likes = comment.likes.filter(like => like.toString() !== userId);
+        } else {
+            comment.likes.push(userId);
+            comment.dislikes = comment.dislikes.filter(dislike => dislike.toString() !== userId);
+        }
+
+        await comment.save();
+        res.status(200).json(comment);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
+// Dislike a post
+const dislikeComment = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const userId = req.session.userId;
+
+        const comment = await Comment.findById(id);
+        if (!comment) {
+            return res.status(404).json({ message: "comment not fond." })
+        }
+
+        if (comment.dislikes.includes(userId)) {
+            comment.dislikes = comment.dislikes.filter(dislike => dislike.toString() !== userId);
+        } else {
+            comment.dislikes.push(userId);
+            comment.likes = comment.likes.filter(like => like.toString() !== userId);
+        }
+
+        await comment.save();
+        res.status(200).json(comment);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
+
 
 //exporting
 module.exports = {
@@ -92,4 +142,6 @@ module.exports = {
     getComments,
     updateComment,
     deleteComment,
+    likeComment,
+    dislikeComment,
 }
