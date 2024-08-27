@@ -76,7 +76,7 @@ const likePost = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const post = await Post.findById(id);
+        const post = await Post.findById(id).populate('authorId', 'username');
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
@@ -101,7 +101,7 @@ const dislikePost = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const post = await Post.findById(id);
+        const post = await Post.findById(id).populate('authorId', 'username');
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }

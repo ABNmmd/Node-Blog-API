@@ -91,7 +91,7 @@ const likeComment = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const comment = await Comment.findById(id);
+        const comment = await Comment.findById(id).populate('authorId', 'username');
         if (!comment) {
             return res.status(404).json({ message: "comment not fond." })
         }
@@ -116,7 +116,7 @@ const dislikeComment = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const comment = await Comment.findById(id);
+        const comment = await Comment.findById(id).populate('authorId', 'username');
         if (!comment) {
             return res.status(404).json({ message: "comment not fond." })
         }
