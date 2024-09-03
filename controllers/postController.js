@@ -9,11 +9,12 @@ const creatPost = async (req, res) => {
 
         let image;
         if (req.file) {
-            image = req.file.path;
+            image.imageUrl = req.file.path;
+            image.imagePublicId = req.file.filename;
         }
 
         // console.log({ title, content, tags, authorId });
-        if (!title || !content || !authorId || !image) {
+        if (!title || !content || !authorId || !image.imageUrl || !image.imagePublicId) {
             return res.status(400).json({ message: "Title, content, tags, authorId and image are required." });
         }
 
