@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const cloudinary = require('../config/cloudinary');
 
 // get user profile
 const getUser = async (req, res) => {
@@ -35,8 +36,9 @@ const getProfile = async (req, res) => {
 // update user profile
 const updateUser = async (req, res) => {
     try {
-        const { username, email, profilePicture, bio } = req.body;
+        const { username, email, bio } = req.body;
         const userId = req.session.userId;
+
         const user = await User.findById(userId);
         // console.log({ username, email, profilePicture, bio });
         if(!user){
@@ -45,8 +47,19 @@ const updateUser = async (req, res) => {
         
         if (username) user.username = username;
         if (email) user.email = email;
-        if (profilePicture) user.profilePicture = profilePicture;
         if (bio) user.bio = bio;
+
+        if (req.file) {
+            if (user.profilePicture && user.profilePicture.imagePublicId) {
+                await cloudinary.uploader.destroy(user.profilePicture.imagePublicId);
+            }
+
+            user.profilePicture = {
+                imageUrl: req.file.path,
+                imagePublicId: req.file.filename
+            };
+        }
+
         user.updatedAt = Date.now();
 
         await user.save();
