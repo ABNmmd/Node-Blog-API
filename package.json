@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cloudinary": "^1.41.3",
     "connect-mongo": "^5.1.0",
     "connect-mongodb-session": "^5.0.0",
     "cors": "^2.8.5",
@@ -21,7 +22,9 @@
     "express-session": "^1.18.0",
     "express-validator": "^7.1.0",
     "mongodb": "^6.6.0",
-    "mongoose": "^8.3.3"
+    "mongoose": "^8.3.3",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
