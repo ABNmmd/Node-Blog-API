@@ -53,10 +53,30 @@ const getPostById = async (req, res) => {
 const updatePost = async (req, res) => {
     try {
         const { id } = req.params;
-        const Updatedpost = await Post.findByIdAndUpdate(id, req.body, { new: true });
-        if (!Updatedpost) {
+        const { title, content, tags } = req.body;
+
+        const post = await Post.findById(id);
+        if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
+
+        if (req.file) {
+            if (post.image && post.image.imagePublicId) {
+                await cloudinary.uploader.destroy(post.image.imagePublicId);
+            }
+
+            post.image = {
+                imageUrl: req.file.path,
+                imagePublicId: req.file.filename,
+            };
+        }
+
+        if (title) post.title = title;
+        if (content) post.content = content;
+        if (tags) post.tags = tags;
+
+
+        const updatedPost = await post.save();
         res.status(200).json(Updatedpost);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -68,11 +88,19 @@ const updatePost = async (req, res) => {
 const deletePost = async (req, res) => {
     try {
         const { id } = req.params;
-        const Deletedpost = await Post.findByIdAndDelete(id);
-        if (!Deletedpost) {
+
+        const post = await Post.findById(id);
+        if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
-        res.status(200).json({ message: "post deleted successfuly" });
+
+        if (post.image && post.image.imagePublicId) {
+            await cloudinary.uploader.destroy(post.image.imagePublicId);
+        }
+
+        await Post.findByIdAndDelete(id);
+
+        res.status(200).json({ message: "Post deleted successfully" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

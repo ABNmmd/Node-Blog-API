@@ -18,10 +18,12 @@ const PostSchema = mongoose.Schema(
         image: {
             imageUrl: {
                 type: String,
+                default: '',
                 required: true,
             },
             imagePublicId: {
                 type: String,
+                default: '',
                 required: true,
             },
         },
