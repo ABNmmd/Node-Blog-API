@@ -1,16 +1,23 @@
 const Post = require("../models/post");
+const cloudinary = require('../config/cloudinary');
 
 //Creat post
 const creatPost = async (req, res) => {
     try {
         const { title, content, tags } = req.body;
         const authorId = req.session.userId;
-        // console.log({ title, content, tags, authorId });
-        if (!title || !content || !authorId) {
-            return res.status(400).json({ message: "Title, content, tags and authorId are required." });
+
+        let image;
+        if (req.file) {
+            image = req.file.path;
         }
 
-        const post = await Post.create({ authorId, title, content, tags });
+        // console.log({ title, content, tags, authorId });
+        if (!title || !content || !authorId || !image) {
+            return res.status(400).json({ message: "Title, content, tags, authorId and image are required." });
+        }
+
+        const post = await Post.create({ authorId, title, content, image, tags });
         res.status(201).json(post);
     } catch (error) {
         res.status(500).json({ message: error.message });
