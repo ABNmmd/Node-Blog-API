@@ -1,6 +1,8 @@
 const express = require('express');
 const { getUser, updateUser, getProfile } = require('../controllers/userController.js');
 
+const upload = require('../config/multer');
+
 const authMiddleware = require('../middleware/authMiddleware.js');
 const { validateUserProfileUpdate } = require('../utils/validators');
 
@@ -14,7 +16,7 @@ router.get('/', authMiddleware, getUser);
 router.get('/:userId', getProfile);
 
 // update user
-router.put('/', authMiddleware, validateUserProfileUpdate, updateUser);
+router.put('/', authMiddleware, validateUserProfileUpdate,  upload.single('image'), updateUser);
 
 
 module.exports= router;
