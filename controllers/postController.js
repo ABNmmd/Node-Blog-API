@@ -6,18 +6,18 @@ const creatPost = async (req, res) => {
     try {
         const { title, content, tags } = req.body;
         const authorId = req.session.userId;
-
-        let image;
+        
+        let image = {};
         if (req.file) {
             image.imageUrl = req.file.path;
             image.imagePublicId = req.file.filename;
         }
-
-        // console.log({ title, content, tags, authorId });
+        
         if (!title || !content || !authorId || !image.imageUrl || !image.imagePublicId) {
             return res.status(400).json({ message: "Title, content, tags, authorId and image are required." });
         }
-
+        
+        // console.log({ authorId, title, content, image, tags });
         const post = await Post.create({ authorId, title, content, image, tags });
         res.status(201).json(post);
     } catch (error) {
