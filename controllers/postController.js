@@ -28,7 +28,7 @@ const creatPost = async (req, res) => {
 // get posts
 const getPosts = async (req, res) => {
     try {
-        const posts = await Post.find({}).populate('authorId', 'username').select("-content -likes -dislikes");
+        const posts = await Post.find({}).populate('authorId', 'username profilePicture').select("-content -likes -dislikes");
         res.status(200).json(posts);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -39,7 +39,7 @@ const getPosts = async (req, res) => {
 const getPostById = async (req, res) => {
     try {
         const { id } = req.params;
-        const post = await Post.findById(id).populate('authorId', 'username');
+        const post = await Post.findById(id).populate('authorId', 'username profilePicture');
         // console.log('post : ', post);
         res.status(200).json(post);
     } catch (error) {
@@ -77,7 +77,7 @@ const updatePost = async (req, res) => {
 
 
         const updatedPost = await post.save();
-        res.status(200).json(Updatedpost);
+        res.status(200).json(updatedPost);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -112,7 +112,7 @@ const likePost = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const post = await Post.findById(id).populate('authorId', 'username');
+        const post = await Post.findById(id).populate('authorId', 'username profilePicture');
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
@@ -137,7 +137,7 @@ const dislikePost = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const post = await Post.findById(id).populate('authorId', 'username');
+        const post = await Post.findById(id).populate('authorId', 'username profilePicture');
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }

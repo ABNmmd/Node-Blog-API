@@ -16,7 +16,7 @@ router.get('/', authMiddleware, getUser);
 router.get('/:userId', getProfile);
 
 // update user
-router.put('/', authMiddleware, validateUserProfileUpdate,  upload.single('image'), updateUser);
+router.put('/', authMiddleware, validateUserProfileUpdate,  upload.single('profilePicture'), updateUser);
 
 
 module.exports= router;

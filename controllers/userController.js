@@ -38,9 +38,9 @@ const updateUser = async (req, res) => {
     try {
         const { username, email, bio } = req.body;
         const userId = req.session.userId;
-
+        // console.log(req.body, req.file);
         const user = await User.findById(userId);
-        // console.log({ username, email, profilePicture, bio });
+        
         if(!user){
             return res.status(404).json({ message: 'User not found' });
         }
@@ -59,9 +59,9 @@ const updateUser = async (req, res) => {
                 imagePublicId: req.file.filename
             };
         }
-
         user.updatedAt = Date.now();
-
+        
+        console.log(user);
         await user.save();
         res.status(200).json({ message: 'Profile updated successfully', user });
     } catch (error) {

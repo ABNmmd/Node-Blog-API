@@ -32,7 +32,7 @@ const createComment = async (req, res) => {
 const getComments = async (req, res) => {
     try {
         const { postId } = req.params;
-        const comments = await Comment.find({ postId }).populate('authorId', 'username');
+        const comments = await Comment.find({ postId }).populate('authorId', 'username profilePicture');
 
         if (!comments) {
             return res.status(404).json({ message: 'No comments found for this post' });
@@ -91,7 +91,7 @@ const likeComment = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const comment = await Comment.findById(id).populate('authorId', 'username');
+        const comment = await Comment.findById(id).populate('authorId', 'username profilePicture');
         if (!comment) {
             return res.status(404).json({ message: "comment not fond." })
         }
@@ -116,7 +116,7 @@ const dislikeComment = async (req, res) => {
         const { id } = req.params;
         const userId = req.session.userId;
 
-        const comment = await Comment.findById(id).populate('authorId', 'username');
+        const comment = await Comment.findById(id).populate('authorId', 'username profilePicture');
         if (!comment) {
             return res.status(404).json({ message: "comment not fond." })
         }
