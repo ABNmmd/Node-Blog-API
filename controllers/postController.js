@@ -6,6 +6,8 @@ const creatPost = async (req, res) => {
     try {
         const { title, content, tags } = req.body;
         const authorId = req.session.userId;
+
+        const parsedTags = JSON.parse(tags);
         
         let image = {};
         if (req.file) {
@@ -18,7 +20,7 @@ const creatPost = async (req, res) => {
         }
         
         // console.log({ authorId, title, content, image, tags });
-        const post = await Post.create({ authorId, title, content, image, tags });
+        const post = await Post.create({ authorId, title, content, image, tags: parsedTags, });
         res.status(201).json(post);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -55,6 +57,8 @@ const updatePost = async (req, res) => {
         const { id } = req.params;
         const { title, content, tags } = req.body;
 
+        const parsedTags = JSON.parse(tags);
+
         const post = await Post.findById(id);
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
@@ -73,7 +77,7 @@ const updatePost = async (req, res) => {
 
         if (title) post.title = title;
         if (content) post.content = content;
-        if (tags) post.tags = tags;
+        if (tags) post.tags = parsedTags;
 
 
         const updatedPost = await post.save();
