@@ -15,7 +15,7 @@ const corsOptions = {
     origin: 'https://academia-hub-front-end.vercel.app',
     credentials: true,
 };
-app.use("*", cors(corsOptions));
+app.use(cors(corsOptions));
 
 
 const store = new MongoDBStore({
