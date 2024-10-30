@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const corsOptions = {
-    origin: ['https://academia-hub-front-end.vercel.app/', 'http://localhost:5173'],
+    origin: ['https://academia-hub-front-end.vercel.app', 'http://localhost:5173'],
     credentials: true,
 };
 app.use(cors(corsOptions));
