@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const corsOptions = {
-    origin: 'academiahub-6l3t.onrender.com',
+    origin: 'https://academiahub-6l3t.onrender.com',
     credentials: true,
 };
 app.use(cors(corsOptions));
@@ -29,7 +29,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: { maxAge: 1000 * 60 * 60 * 24, sameSite: "none", secure: true } // 1 day
+    cookie: { maxAge: 1000 * 60 * 60 * 24, sameSite: "none", secure: true, domain: 'academiahub-6l3t.onrender.com' } // 1 day
 }));
 
 // Middleware to parse JSON
