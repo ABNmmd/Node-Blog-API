@@ -38,6 +38,7 @@ const login = async (req, res) => {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
         req.session.userId = user._id;
+        req.session.save((err) => console.log(err));
         res.status(200).json({ message: 'Logged in successfully'});
     } catch(error) {
         res.status(500).json({ error: error.message })
