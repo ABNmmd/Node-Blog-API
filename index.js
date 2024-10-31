@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const corsOptions = {
-    origin: 'https://academiahub-6l3t.onrender.com/',
+    origin: 'https://academiahub-6l3t.onrender.com',
     credentials: true,
 };
 app.use(cors(corsOptions));
