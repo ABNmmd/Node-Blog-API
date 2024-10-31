@@ -29,7 +29,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: { maxAge: 1000 * 60 * 60 * 24, sameSite: "none", secure: true, httpOnly: true } // 1 day
+    cookie: { maxAge: 1000 * 60 * 60 * 24, sameSite: "none", secure: true, httpOnly: false } // 1 day
 }));
 
 // Middleware to parse JSON
