@@ -14,6 +14,8 @@ const app = express();
 const corsOptions = {
     origin: 'https://academiahub-6l3t.onrender.com',
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));
 
@@ -29,7 +31,13 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: store,
-    cookie: { maxAge: 1000 * 60 * 60 * 24, sameSite: "lax", secure: true } // 1 day
+    cookie: { 
+        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        sameSite: 'none',
+        secure: true,
+        httpOnly: true,
+        domain: '.onrender.com'
+    }
 }));
 
 // Middleware to parse JSON
