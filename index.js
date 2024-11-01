@@ -32,6 +32,10 @@ const store = new MongoDBStore({
     collection: "mySessions"
 });
 
+
+// Middleware to parse JSON
+app.use(express.json());
+
 // Set up session middleware
 app.use(session({
     secret: process.env.SESSION_SECRET || 'my_secret_key',
@@ -45,10 +49,6 @@ app.use(session({
         httpOnly: true,
     }
 }));
-
-// Middleware to parse JSON
-app.use(express.json());
-
 
 //Import routes
 const authRoutes = require('./routes/authRoutes.js');
