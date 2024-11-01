@@ -14,11 +14,17 @@ const app = express();
 const corsOptions = {
     origin: 'https://academiahub-6l3t.onrender.com',
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 };
 app.use(cors(corsOptions));
 
+// Add the security headers here
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Credentials', 'true');
+    res.header('Access-Control-Allow-Origin', 'https://academiahub-6l3t.onrender.com');
+    next();
+});
 
 const store = new MongoDBStore({
     mongoUrl: process.env.MONGODB_URI,
